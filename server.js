@@ -24,17 +24,13 @@ app.get("/api/hello", function(req, res) {
 });
 
 app.get("/api/whoami", function(req, res) {
-  // console.log('What is global', global)
-  // res.json({
-  //   software: window.navigator.userAgent
-  // })
-  console.log("what is this", req.ip);
-  console.log("what is this as well", req.acceptsLanguages());
-  console.log("user agent", req.headers['user-agent'])
+  const lang = req.acceptsLanguages().slice(1, -1);
+  
+  console.log('lang', JSON.stringify(lang).slice(1,-1))
    
   res.json({
     ipaddress: req.ip,
-    language: req.acceptsLanguages(),
+    language: JSON.stringify(lang).slice(1, -1),
     software: req.headers['user-agent']
   })
 });
